@@ -5,17 +5,21 @@ android {
     buildToolsVersion "21.1.1"
 
     defaultConfig {
-        applicationId "nl.changer.enhancedpriorityjobqueue"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
-        release {
+        /* release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+        } */
+
+release {
+        minifyEnabled false
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
     }
 }
 
