@@ -36,6 +36,7 @@ public class SqliteJobQueue implements JobQueue {
     QueryCache nextJobsQueryCache;
 
     /**
+     *
      * @param context application context
      * @param sessionId session id should match {@link JobManager}
      * @param id uses this value to construct database name {@code "db_" + id}
@@ -220,7 +221,7 @@ public class SqliteJobQueue implements JobQueue {
 
     private String createReadyJobWhereSql(boolean hasNetwork, Collection<String> excludeGroups, boolean groupByRunningGroup) {
         String where = DbOpenHelper.RUNNING_SESSION_ID_COLUMN.columnName + " != ? "
-                + " AND " + DbOpenHelper.DELAY_UNTIL_NS_COLUMN.columnName + " <= ? ";
+                        + " AND " + DbOpenHelper.DELAY_UNTIL_NS_COLUMN.columnName + " <= ? ";
         if(hasNetwork == false) {
             where += " AND " + DbOpenHelper.REQUIRES_NETWORK_COLUMN.columnName + " != 1 ";
         }

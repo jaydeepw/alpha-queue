@@ -7,7 +7,7 @@ public class JqLog {
     private static CustomLogger customLogger = new CustomLogger() {
         @Override
         public boolean isDebugEnabled() {
-            return false;
+            return true;
         }
 
         @Override

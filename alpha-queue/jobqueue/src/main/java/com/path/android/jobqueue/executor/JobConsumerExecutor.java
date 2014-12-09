@@ -1,5 +1,6 @@
 package com.path.android.jobqueue.executor;
 
+import com.path.android.jobqueue.DebugLog;
 import com.path.android.jobqueue.JobHolder;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.JobQueue;
@@ -74,7 +75,7 @@ public class JobConsumerExecutor {
     }
 
     private void addConsumer() {
-        JqLog.d("adding another consumer");
+        DebugLog.d("adding another consumer");
         synchronized (threadGroup) {
             Thread thread = new Thread(threadGroup, new JobConsumer(contract, this));
             activeConsumerCount.incrementAndGet();
@@ -103,7 +104,6 @@ public class JobConsumerExecutor {
             }
             return res;
         }
-
     }
 
     private void onBeforeRun(JobHolder jobHolder) {
@@ -130,6 +130,14 @@ public class JobConsumerExecutor {
      */
     public boolean isRunning(long id, boolean persistent) {
         return runningJobHolders.containsKey(createRunningJobHolderKey(id, persistent));
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getRunningJobsCount() {
+        return runningJobHolders.size();
     }
 
     /**
@@ -199,8 +207,10 @@ public class JobConsumerExecutor {
                         if (nextJob != null) {
                             executor.onBeforeRun(nextJob);
                             if (nextJob.safeRun(nextJob.getRunCount())) {
+                                DebugLog.i(" Not saferun");
                                 contract.removeJob(nextJob);
                             } else {
+                                DebugLog.i(" insert or replace");
                                 contract.insertOrReplace(nextJob);
                             }
                             executor.onAfterRun(nextJob);

@@ -9,7 +9,7 @@ import com.path.android.jobqueue.di.DependencyInjector;
 import com.path.android.jobqueue.log.CustomLogger;
 import com.path.android.jobqueue.network.NetworkUtil;
 import com.path.android.jobqueue.network.NetworkUtilImpl;
-import com.path.android.jobqueue.nonPersistentQueue.NonPersistentPriorityQueue;
+// import com.path.android.jobqueue.nonPersistentQueue.NonPersistentPriorityQueue;
 import com.path.android.jobqueue.persistentQueue.sqlite.SqliteJobQueue;
 
 /**
@@ -102,7 +102,7 @@ public class Configuration {
 
         /**
          * JobManager needs one persistent and one non-persistent {@link JobQueue} to function.
-         * By default, it will use {@link SqliteJobQueue} and {@link NonPersistentPriorityQueue}
+         * By default, it will use {@link SqliteJobQueue}
          * You can provide your own implementation if they don't fit your needs. Make sure it passes all tests in
          * {@link JobQueueTestBase} to ensure it will work fine.
          * @param queueFactory your custom queue factory.

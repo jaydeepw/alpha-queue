@@ -40,6 +40,7 @@ public class QueryCache {
         if(excludeGroups == null || excludeGroups.size() == 0) {
             return hasNetwork ? KEY_EMPTY_WITH_NETWORK : KEY_EMPTY_WITHOUT_NETWORK;
         }
+
         reusedBuilder.setLength(0);
         reusedBuilder.append(hasNetwork ? "X" : "Y");
         for(String group : excludeGroups) {
