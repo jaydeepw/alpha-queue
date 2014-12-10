@@ -1,8 +1,9 @@
-package com.path.android.jobqueue.persistentQueue.sqlite;
+package nl.changer.database;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
-import com.path.android.jobqueue.log.JqLog;
+
+import nl.changer.util.QLog;
 
 /**
  * Helper class for {@link SqliteJobQueue} to generate sql queries and statements.
@@ -37,7 +38,7 @@ public class SqlHelper {
     }
 
     public static String create(String tableName, Property primaryKey, Property... properties) {
-        StringBuilder builder = new StringBuilder("CREATE TABLE ");
+        StringBuilder builder = new StringBuilder("CREATE TABLE IF NOT EXISTS ");
         builder.append(tableName).append(" (");
         builder.append(primaryKey.columnName).append(" ");
         builder.append(primaryKey.type);
@@ -46,7 +47,7 @@ public class SqlHelper {
             builder.append(", `").append(property.columnName).append("` ").append(property.type);
         }
         builder.append(" );");
-        JqLog.d(builder.toString());
+        QLog.d(builder.toString());
         return builder.toString();
     }
 
@@ -160,7 +161,7 @@ public class SqlHelper {
     }
 
     public void truncate() {
-        db.execSQL("DELETE FROM " + DbOpenHelper.JOB_HOLDER_TABLE_NAME);
+        db.execSQL("DELETE FROM " + DbOpenHelper.JOB_TABLE_NAME);
         vacuum();
     }
 
@@ -169,7 +170,7 @@ public class SqlHelper {
     }
 
     public void resetDelayTimesTo(long newDelayTime) {
-        db.execSQL("UPDATE " + DbOpenHelper.JOB_HOLDER_TABLE_NAME + " SET " + DbOpenHelper.DELAY_UNTIL_NS_COLUMN.columnName + "=?"
+        db.execSQL("UPDATE " + DbOpenHelper.JOB_TABLE_NAME + " SET " + DbOpenHelper.DELAY_UNTIL_NS_COLUMN.columnName + "=?"
             , new Object[]{newDelayTime});
     }
 

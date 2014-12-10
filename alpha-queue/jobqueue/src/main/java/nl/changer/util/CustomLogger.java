@@ -1,7 +1,7 @@
-package com.path.android.jobqueue.log;
+package nl.changer.util;
 
-/**
- * You can provide your own logger implementation to {@link com.path.android.jobqueue.JobManager}
+/***
+ * You can provide your own logger implementation to {@link nl.changer.alphaqueue.QueueManager}
  * it is very similar to Roboguice's logger
  */
 public interface CustomLogger {

@@ -1,9 +1,9 @@
-package com.path.android.jobqueue.log;
+package nl.changer.util;
 
 /**
  * Wrapper around {@link CustomLogger}. by default, logs to nowhere
  */
-public class JqLog {
+public class QLog {
     private static CustomLogger customLogger = new CustomLogger() {
         @Override
         public boolean isDebugEnabled() {
@@ -17,7 +17,7 @@ public class JqLog {
 
         @Override
         public void e(Throwable t, String text, Object... args) {
-            //void
+            // void
         }
 
         @Override
@@ -27,7 +27,7 @@ public class JqLog {
     };
 
     public static void setCustomLogger(CustomLogger customLogger) {
-        JqLog.customLogger = customLogger;
+        QLog.customLogger = customLogger;
     }
 
     public static boolean isDebugEnabled() {
